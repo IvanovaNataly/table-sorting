@@ -1,0 +1,13 @@
+<table>
+  <thead *ngIf="tableData && tableData.length">
+    <tr>
+      <th *ngFor="let prop of tableData[0] | keyvalue">{{ prop.key }}</th>
+    </tr>
+  </thead>
+
+  <tbody *ngIf="tableData && tableData.length">
+   <tr *ngFor="let item of tableData">
+     <td *ngFor="let prop of item | keyvalue">{{ prop.value }}</td>
+   </tr>
+  </tbody>
+</table>
