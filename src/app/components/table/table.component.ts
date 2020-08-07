@@ -14,12 +14,9 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.getData().subscribe( res => {
-      if (res) {
         this.tableData = res;
-      }
-      else {
-        this.serverError = true;
-      }
+    }, (error) => {
+      this.serverError = true;
     });
   }
 
