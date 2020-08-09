@@ -1,10 +1,10 @@
 <!--<input type="text" [formControl]="filterValue" name="filterValue">-->
 <input type="text" [(ngModel)]="filter">
 <button (click)="filterTable()">Filter</button>
-<table *ngIf="tableData?.length">
+<table *ngIf="filteredTable?.length">
   <thead>
     <tr>
-      <th *ngFor="let prop of tableData[0] | keyvalue">
+      <th *ngFor="let prop of filteredTable[0] | keyvalue">
         {{ prop.key }}
         <button (click)="sortTable(true, prop.key)">ascend</button>
         <button (click)="sortTable(false, prop.key)">descend</button>
@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-   <tr *ngFor="let item of tableData">
+   <tr *ngFor="let item of filteredTable">
      <td *ngFor="let prop of item | keyvalue">{{ prop.value }}</td>
    </tr>
   </tbody>

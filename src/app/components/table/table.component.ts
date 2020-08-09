@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
     this.filterValue = new FormControl('');
     this.httpService.getData().subscribe( res => {
       this.tableData = res;
-      // this.filteredTable = JSON.parse(JSON.stringify(this.tableData));
+      this.filteredTable = JSON.parse(JSON.stringify(this.tableData));
       // console.log(this.filteredTable);
       // this.filterValue.valueChanges.subscribe(val => console.log(val));
       // console.log(this.filteredTable);
@@ -33,8 +33,12 @@ export class TableComponent implements OnInit {
   }
 
   filterTable() {
-    this.tableData = this.tableData.filter(line => {
-      return line.item.toLowerCase().includes(this.filter);
+    this.filteredTable = this.tableData.filter(line => {
+      let filteredLine: any;
+      Object.keys(line).forEach(key => {
+        if (line[key].toLowerCase().includes(this.filter)) filteredLine = line;
+      });
+      return filteredLine;
     });
   }
 
