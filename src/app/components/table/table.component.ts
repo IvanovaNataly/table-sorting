@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HTTPService } from '../../services/http-service.service';
 import { ProductProperties } from '../../enums/productProp';
-import {FormControl} from "@angular/forms";
-import {map, startWith} from "rxjs/internal/operators";
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +14,6 @@ export class TableComponent implements OnInit {
   public sortValue: ProductProperties;
   public filterValue: FormControl;
   public filteredTable: any;
-  public filter: string;
 
   constructor( private httpService: HTTPService ) { }
 
