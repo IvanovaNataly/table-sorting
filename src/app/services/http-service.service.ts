@@ -15,7 +15,6 @@ export class HTTPService {
   }
 
   getData(): Observable<any> {
-    console.log(this.http.get(routes.templateUrl()));
     return this.http.get(routes.templateUrl());
   }
 }
