@@ -1,4 +1,7 @@
-<table *ngIf="tableData && tableData.length">
+<!--<input type="text" [formControl]="filterValue" name="filterValue">-->
+<input type="text" [(ngModel)]="filter">
+<button (click)="filterTable()">Filter</button>
+<table *ngIf="tableData?.length">
   <thead>
     <tr>
       <th *ngFor="let prop of tableData[0] | keyvalue">

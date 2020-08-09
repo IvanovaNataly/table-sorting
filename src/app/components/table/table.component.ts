@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HTTPService} from "../../services/http-service.service";
+import { HTTPService } from '../../services/http-service.service';
 import { ProductProperties } from '../../enums/productProp';
+import {FormControl} from "@angular/forms";
+import {map, startWith} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-table',
@@ -11,15 +13,35 @@ export class TableComponent implements OnInit {
   public serverError: boolean;
   public tableData: Array<any>;
   public sortValue: ProductProperties;
+  public filterValue: FormControl;
+  public filteredTable: any;
+  public filter: string;
 
   constructor( private httpService: HTTPService ) { }
 
   ngOnInit() {
+    this.filterValue = new FormControl('');
     this.httpService.getData().subscribe( res => {
-        this.tableData = res;
+      this.tableData = res;
+      // this.filteredTable = JSON.parse(JSON.stringify(this.tableData));
+      // console.log(this.filteredTable);
+      // this.filterValue.valueChanges.subscribe(val => console.log(val));
+      // console.log(this.filteredTable);
     }, (error) => {
       this.serverError = true;
     });
+  }
+
+  filterTable() {
+    this.tableData = this.tableData.filter(line => {
+      return line.item.toLowerCase().includes(this.filter);
+    });
+  }
+
+  _filter(value: string) {
+    // const filterValue = value.toLowerCase();
+    // return this.tableData.filter(option => option.item.toLowerCase().includes(filterValue));
+    return this.tableData.filter(option => {return option});
   }
 
   sortTable(ascending: boolean, propKey: ProductProperties) {
