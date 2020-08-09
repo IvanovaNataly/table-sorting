@@ -1,6 +1,4 @@
-<!--<input type="text" [formControl]="filterValue" name="filterValue">-->
-<input type="text" [(ngModel)]="filter">
-<button (click)="filterTable()">Filter</button>
+<input type="text" [formControl]="filterValue" name="filterValue">
 <table *ngIf="filteredTable?.length">
   <thead>
     <tr>

@@ -24,28 +24,20 @@ export class TableComponent implements OnInit {
     this.httpService.getData().subscribe( res => {
       this.tableData = res;
       this.filteredTable = JSON.parse(JSON.stringify(this.tableData));
-      // console.log(this.filteredTable);
-      // this.filterValue.valueChanges.subscribe(val => console.log(val));
-      // console.log(this.filteredTable);
+      this.filterValue.valueChanges.subscribe(value => this.filterTable(value));
     }, (error) => {
       this.serverError = true;
     });
   }
 
-  filterTable() {
+  filterTable(value: string) {
     this.filteredTable = this.tableData.filter(line => {
       let filteredLine: any;
       Object.keys(line).forEach(key => {
-        if (line[key].toLowerCase().includes(this.filter)) filteredLine = line;
+        if (line[key].toLowerCase().includes(value.toLowerCase())) filteredLine = line;
       });
       return filteredLine;
     });
-  }
-
-  _filter(value: string) {
-    // const filterValue = value.toLowerCase();
-    // return this.tableData.filter(option => option.item.toLowerCase().includes(filterValue));
-    return this.tableData.filter(option => {return option});
   }
 
   sortTable(ascending: boolean, propKey: ProductProperties) {
