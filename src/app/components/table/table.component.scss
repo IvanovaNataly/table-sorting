@@ -1,0 +1,55 @@
+$primary-color: #EBB2BF;
+$contrast-color: #000000;
+
+.custom-table {
+  color: $contrast-color;
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+  border-width: 1px;
+  border-color: $primary-color;
+  border-style: solid;
+  &-head {
+    background-color: $primary-color;
+  }
+  &-head-cell,
+  &-body-cell {
+    padding: 5px;
+    border-width: 1px;
+    border-color: $primary-color;
+    border-style: solid;
+  }
+  &-head-cell-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.btn-sort {
+  font-size: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  padding: 0;
+  background-color: transparent;
+  background-image: url(../../../assets/images/arrow.svg);
+  background-size: contain;
+  border: none;
+  &.asc:not(.disabled) {
+    transform: rotate(180deg);
+  }
+  &.disabled {
+    opacity: 0.3;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+

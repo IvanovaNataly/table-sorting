@@ -14,14 +14,18 @@ export class TableComponent implements OnInit {
   public sortValue: ProductProperties;
   public filterValue: FormControl;
   public filteredTable: any;
+  public sortOrderDesc: boolean;
 
   constructor( private httpService: HTTPService ) { }
 
   ngOnInit() {
     this.filterValue = new FormControl('');
+    this.sortOrderDesc = true;
+    this.sortValue = ProductProperties.CatId;
     this.httpService.getData().subscribe( res => {
       this.tableData = res;
       this.filteredTable = JSON.parse(JSON.stringify(this.tableData));
+      this.filteredTable.sort( this.compareNumeric.bind(this));
       this.filterValue.valueChanges.subscribe(value => this.filterTable(value));
     }, (error) => {
       this.serverError = true;
@@ -38,7 +42,8 @@ export class TableComponent implements OnInit {
     });
   }
 
-  sortTable(ascending: boolean, propKey: ProductProperties) {
+  sortTable(propKey: ProductProperties) {
+    this.sortOrderDesc = !this.sortOrderDesc;
     this.sortValue = propKey;
     if (propKey === ProductProperties.ProductId ||
       propKey === ProductProperties.CatId ||
@@ -47,7 +52,7 @@ export class TableComponent implements OnInit {
     } else {
       this.filteredTable.sort( this.compareString.bind(this) );
     }
-    if (!ascending) {
+    if (!this.sortOrderDesc) {
       this.filteredTable.reverse();
     }
   }

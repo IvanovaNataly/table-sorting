@@ -1,18 +1,27 @@
 <input type="text" [formControl]="filterValue" name="filterValue">
-<table *ngIf="filteredTable?.length">
-  <thead>
-    <tr>
-      <th *ngFor="let prop of filteredTable[0] | keyvalue">
-        {{ prop.key }}
-        <button (click)="sortTable(true, prop.key)">ascend</button>
-        <button (click)="sortTable(false, prop.key)">descend</button>
+<table *ngIf="filteredTable?.length" class="custom-table">
+  <thead class="custom-table-head">
+    <tr class="custom-table-head-row">
+      <th *ngFor="let prop of filteredTable[0] | keyvalue" class="custom-table-head-cell">
+        <div class="custom-table-head-cell-container">
+          {{ prop.key }}
+          <button (click)="sortTable(prop.key)" class="btn-sort"
+                  [ngClass]="{ 'asc': !sortOrderDesc, 'disabled': (prop.key != sortValue) }">
+            <ng-template [ngIf]="sortOrderDesc" [ngIfElse]="ascending">
+              descending order
+            </ng-template>
+            <ng-template id="#ascending">
+              ascending order
+            </ng-template>
+          </button>
+        </div>
       </th>
     </tr>
   </thead>
 
-  <tbody>
-   <tr *ngFor="let item of filteredTable">
-     <td *ngFor="let prop of item | keyvalue">{{ prop.value }}</td>
+  <tbody class="custom-table-body">
+   <tr *ngFor="let item of filteredTable" class="custom-table-body-row">
+     <td *ngFor="let prop of item | keyvalue" class="custom-table-body-cell">{{ prop.value }}</td>
    </tr>
   </tbody>
 </table>
