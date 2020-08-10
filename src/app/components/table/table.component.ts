@@ -43,12 +43,12 @@ export class TableComponent implements OnInit {
     if (propKey === ProductProperties.ProductId ||
       propKey === ProductProperties.CatId ||
       propKey === ProductProperties.ProductSize) {
-      this.tableData.sort( this.compareNumeric.bind(this) );
+      this.filteredTable.sort( this.compareNumeric.bind(this) );
     } else {
-      this.tableData.sort( this.compareString.bind(this) );
+      this.filteredTable.sort( this.compareString.bind(this) );
     }
     if (!ascending) {
-      this.tableData.reverse();
+      this.filteredTable.reverse();
     }
   }
 
